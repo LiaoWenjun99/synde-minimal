@@ -1,0 +1,612 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SynDe</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <style>
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0fafa;
+      color: #2b2b2b;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #d5e8d4;
+    }
+
+    .logo img {
+      height: 100px;
+    }
+
+    nav a {
+      margin: 0 3px;
+      text-decoration: none;
+      color: #EF7C00;
+      font-weight: 750;
+      font-size: 1.2rem;
+      padding: 2px 2px;
+      border-radius: 2px;
+      transition: all 0.25s ease-in-out;
+    }
+
+    nav a:hover {
+      background-color: #EF7C00;
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-btn {
+      margin-left: 20px;
+      padding: 10px 16px;
+      background-color: #EF7C00;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+
+    .chat-btn:hover {
+      background-color: #135d5e;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-modern {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5rem 2rem;
+      background: linear-gradient(to right, #e0f7fa, #fefefe);
+    }
+
+    .hero-content {
+      max-width: 600px;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #004d40;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid #004d40;
+      width: 0;
+      animation: typing 3s steps(30, end) forwards, blink 0.75s;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #555;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    .cta-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background: #1b7e83;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .cta-btn:hover {
+      background: #155f61;
+    }
+
+
+    .hero-video-carousel {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding: 1rem 0;
+      max-width: 700px;
+    }
+
+    .video-card {
+      flex: 0 0 auto;
+      width: 600px;
+      text-align: center;
+      opacity: 0.4;
+      transition: opacity 0.4s ease;
+    }
+
+    .video-card.active {
+      opacity: 1;
+    }    
+    
+    .video-card video {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .video-card p {
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.1);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      padding: 1rem 0.2rem;
+      cursor: pointer;
+      z-index: 1;
+      transition: background-color 0.3s;
+      border-radius: 4px;
+    }
+
+    .carousel-btn:hover {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .carousel-btn.left {
+      left: -2.5rem;
+    }
+
+    .carousel-btn.right {
+      right: -1.5rem;
+    }
+
+
+    .features {
+      display: flex;
+      justify-content: space-around;
+      gap: 2rem;
+      padding: 4rem 2rem;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      width: 30%;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .models-modern {
+      padding: 4rem 2rem;
+      background-color: #eef2f3;
+      text-align: center;
+    }
+
+    .model-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .model-box {
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 250px;
+      text-align: center;
+      transition: transform 0.2s, background-color 0.3s;
+    }
+
+    .model-box img {
+      width: 100%;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+
+    .model-box:hover {
+      transform: translateY(-6px);
+      background-color: #f3fbfd;
+    }
+
+    .resource-links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .resource-icon {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s ease;
+    }
+
+    .resource-icon:hover {
+      transform: scale(1.15);
+    }
+
+    .team-section {
+      padding: 4rem 2rem;
+      background-color: #f8f8f8;
+      text-align: center;
+    }
+
+    .team-members {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .team-member {
+      width: 200px;
+    }
+
+    .team-member img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    #references ul {
+      list-style: disc;
+      padding-left: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #d5e8d4;
+      font-weight: 500;
+    }
+  </style>
+  <link rel="icon" type="image/png" href="{% static 'home/images/logos/S.png' %}">
+
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="{% static 'home/images/logos/SynDe future 2.png' %}" alt="SynDe Logo"><img src="{% static 'home/images/logos/S.png' %}" alt="SynDe Logo">
+    
+    </div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#features">Features</a>
+      <a href="#models">Models</a>
+      <a href="{% url 'models_home' %}">Models Details</a>
+      <a href="#about">About</a>
+      <a href="#references">References</a>
+      <a href="{% url 'chat_home' %}" class="chat-btn">Try SynDe Chat</a>
+    </nav>
+  </header>
+
+
+  <section class="hero-modern" id="home">
+    <div class="hero-content" data-aos="fade-right">
+      <h1>One Stop Protein Engineering Assistant</h1>
+      <p>AI-driven prediction, mutation, folding, and optimization tools</p>
+      <p>all in one place.</p>
+      <a href="{% url 'chat_home' %}" class="cta-btn">Launch SynDe Chat</a>
+    </div>
+    <div class="carousel-container" data-aos="fade-left">
+      <button class="carousel-btn left" onclick="prevVideo()">&#8592;</button>
+      <div class="hero-video-carousel" id="carousel">
+        <div class="video-card active">
+          <video autoplay muted controls>
+            <source src="{% static '/home/images/SyndeChat_Beta.mp4' %}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p>General Overview</p>
+        </div>
+        <div class="video-card">
+          <video muted controls>
+            <source src="{% static '/home/images/Synde_chat_generate.mp4' %}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p>Generate Variant with Higher Desired Property</p>
+        </div>
+        <div class="video-card">
+          <video muted controls>
+            <source src="{% static '/home/images/Synde_chat_multi_properties.mp4' %}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p>Multi-Properties Prediction/Generation</p>
+        </div>
+      </div>
+      <button class="carousel-btn right" onclick="nextVideo()">&#8594;</button>
+    </div>
+  </section>
+
+  <script>
+    let currentIndex = 0;
+    const cards = document.querySelectorAll('.video-card');
+    const videos = document.querySelectorAll('.video-card video');
+    const carousel = document.getElementById('carousel');
+
+    function updateCarousel() {
+      cards.forEach((card, index) => {
+        if (index === currentIndex) {
+          card.classList.add('active');
+          videos[index].play();
+          card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        } else {
+          card.classList.remove('active');
+          videos[index].pause();
+          videos[index].currentTime = 0;
+        }
+      });
+    }
+
+    function prevVideo() {
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      updateCarousel();
+    }
+
+    function nextVideo() {
+      currentIndex = (currentIndex + 1) % cards.length;
+      updateCarousel();
+    }
+
+    document.addEventListener('DOMContentLoaded', updateCarousel);
+  </script>
+
+  <section class="features" id="features">
+    <div class="feature-card" data-aos="zoom-in-up">
+      <h3>Chat Based</h3>
+      <p>Ask protein related queries, be it protein information, prediction, or generation of your desired property/properties.</p>
+    </div>
+    <div class="feature-card" data-aos="zoom-in-up">
+      <h3>State-of-the-Art Protein Models</h3>
+      <p>Leverage cutting-edge protein language models powered by deep learning and transformer architectures, validated through in-depth research. (Explore below to learn more)</p>
+    </div>
+    <div class="feature-card" data-aos="zoom-in-up">
+      <h3>Database Search</h3>
+      <p>Ask functional queries and fetch curated data from UniProt, BRENDA, and PDB.</p>
+    </div>
+  </section>
+
+  <section class="models-modern" id="models">
+    <h2>Powered by State-of-the-Art Models</h2>
+    <div class="model-grid">
+
+      <!-- ESMFold -->
+      <div class="model-box" data-aos="fade-up">
+        <img src="{% static 'home/images/Meta_lockup_positive primary_RGB.jpg' %}" alt="META">
+        <h4>ESMFold</h4>
+        <p>Sequence to Structure predictor.</p>
+        <div class="resource-links">
+          <a href="https://doi.org/10.1126/science.ade2574" target="_blank">
+            <img src="{% static 'home/images/paper_icon.png' %}" alt="Paper" class="resource-icon">
+          </a>
+          <a href="https://github.com/facebookresearch/esm" target="_blank">
+            <img src="{% static 'home/images/github_icon.png' %}" alt="GitHub" class="resource-icon">
+          </a>
+          <a href="https://zenodo.org/record/1234567" target="_blank">
+            <img src="{% static 'home/images/zenodo_icon.png' %}" alt="Zenodo" class="resource-icon">
+          </a>
+        </div>
+      </div>
+    
+      <!-- ProGen2 -->
+      <div class="model-box" data-aos="fade-up">
+        <img src="{% static 'home/images/Salesforce Logo.jpeg' %}" alt="Salesforce">
+        <h4>ProGen2</h4>
+        <p>Generating novel viable sequences, and predicting protein fitness.</p>
+        <div class="resource-links">
+          <a href="https://doi.org/10.1016/j.cels.2023.10.002" target="_blank">
+            <img src="{% static 'home/images/paper_icon.png' %}" alt="Paper" class="resource-icon">
+          </a>
+          <a href="https://github.com/salesforce/progen" target="_blank">
+            <img src="{% static 'home/images/github_icon.png' %}" alt="GitHub" class="resource-icon">
+          </a>
+          <a href="https://zenodo.org/record/1234568" target="_blank">
+            <img src="{% static 'home/images/zenodo_icon.png' %}" alt="Zenodo" class="resource-icon">
+          </a>
+        </div>
+      </div>
+    
+      <!-- TemBERTure -->
+      <div class="model-box" data-aos="fade-up">
+        <img src="{% static 'home/images/TemBERTure_logo.png' %}" alt="TemBERTure">
+        <h4>TemBERTure</h4>
+        <p>Optimize melting temperature for improved enzyme stability.</p>
+        <div class="resource-links">
+          <a href="https://academic.oup.com/bioinformaticsadvances/article/4/1/vbae103/7713394" target="_blank">
+            <img src="{% static 'home/images/paper_icon.png' %}" alt="Paper" class="resource-icon">
+          </a>
+          <a href="https://github.com/ibmm-unibe-ch/TemBERTure" target="_blank">
+            <img src="{% static 'home/images/github_icon.png' %}" alt="GitHub" class="resource-icon">
+          </a>
+          <a href="https://zenodo.org/records/10931927" target="_blank">
+            <img src="{% static 'home/images/zenodo_icon.png' %}" alt="Zenodo" class="resource-icon">
+          </a>
+
+        </div>
+      </div>
+    
+      <!-- FoldX -->
+      <div class="model-box" data-aos="fade-up">
+        <img src="{% static 'home/images/FoldX_logo.png' %}" alt="FoldX">
+        <h4>FoldX</h4>
+        <p>Evaluate protein stability with energy-based folding predictions.</p>
+        <div class="resource-links">
+          <a href="https://foldxsuite.crg.eu/" target="_blank">
+            <img src="{% static 'home/images/paper_icon.png' %}" alt="Website" class="resource-icon">
+          </a>
+        </div>
+      </div>
+    
+      <!-- fpocket -->
+      <div class="model-box" data-aos="fade-up">
+        <img src="{% static 'home/images/fpocket_logo.png' %}" alt="fpocket">
+        <h4>fpocket</h4>
+        <p>Detect functional binding sites using Voronoi tessellation and alpha spheres.</p>
+        <div class="resource-links">
+          <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-10-168" target="_blank">
+            <img src="{% static 'home/images/paper_icon.png' %}" alt="Paper" class="resource-icon">
+          </a>
+          <a href="https://github.com/Discngine/fpocket" target="_blank">
+            <img src="{% static 'home/images/github_icon.png' %}" alt="GitHub" class="resource-icon">
+          </a>
+        </div>
+      </div>
+    
+      <!-- CLEAN -->
+      <div class="model-box" data-aos="fade-up">
+        <img src="{% static 'home/images/CLEAN.png' %}" alt="CLEAN">
+        <h4>CLEAN</h4>
+        <p>Enzyme function (EC NUMBER) prediction using contrastive learning.</p>
+        <div class="resource-links">
+          <a href="https://www.science.org/doi/10.1126/science.adf2465" target="_blank">
+            <img src="{% static 'home/images/paper_icon.png' %}" alt="Paper" class="resource-icon">
+          </a>
+          <a href="https://github.com/tttianhao/CLEAN" target="_blank">
+            <img src="{% static 'home/images/github_icon.png' %}" alt="GitHub" class="resource-icon">
+          </a>
+          
+        </div>
+      </div>
+    
+      <!-- TOMER -->
+      <div class="model-box" data-aos="fade-up">
+        <img src="{% static 'home/images/Tomer Logo.png' %}" alt="TOMER">
+        <h4>TOMER</h4>
+        <p>Temperature Optima for Enzymes with Resampling.</p>
+        <div class="resource-links">
+          <a href="https://pubs.acs.org/doi/10.1021/acs.jcim.0c00489" target="_blank">
+            <img src="{% static 'home/images/paper_icon.png' %}" alt="Paper" class="resource-icon">
+          </a>
+          <a href="https://github.com/jafetgado/tomer" target="_blank">
+            <img src="{% static 'home/images/github_icon.png' %}" alt="GitHub" class="resource-icon">
+          </a>
+          
+        </div>
+        <p>*Logo generated by chatgpt</p>
+      </div>
+    
+      <!-- DeepEnzyme -->
+      <div class="model-box" data-aos="fade-up">
+        <img src="{% static 'home/images/Deepenzyme logo.png' %}" alt="DeepEnzyme">
+        <h4>DeepEnzyme</h4>
+        <p>Deep learning model for enzyme turnover number prediction using protein 3D-structures.</p>
+        <div class="resource-links">
+          <a href="https://doi.org/10.1093/bib/bbae409" target="_blank">
+            <img src="{% static 'home/images/paper_icon.png' %}" alt="Paper" class="resource-icon">
+          </a>
+          <a href="https://github.com/hongzhonglu/DeepEnzyme/tree/main" target="_blank">
+            <img src="{% static 'home/images/github_icon.png' %}" alt="GitHub" class="resource-icon">
+          </a>
+        </div>
+        <p>*Logo generated by chatgpt</p>
+      </div>
+    
+    </div>
+    
+  </section>
+
+  <section class="team-section" id="about">
+    <h2>Meet Our Team</h2>
+    <div class="team-members">
+      <div class="team-member">
+        <img src="{% static '/home/images/poh-chueh-loo.jpg' %}" alt="Poh Chueh Loo">
+        <h3>Dr. Poh Chueh Loo</h3>
+        <p>Associate Professor</p>
+      </div>
+      <div class="team-member">
+        <img src="{% static '/home/images/Yeoh-Jing-Wui.jpg' %}" alt="Yeoh Jing Wui">
+        <h3>Yeoh Jing Wui</h3>
+        <p>Senior Research Fellow</p>
+      </div>
+      <div class="team-member">
+        <img src="{% static '/home/images/pawan.jpg' %}" alt="Chinari Pawan Kumar Patro">
+        <h3>Chinari Pawan Kumar Patro</h3>
+        <p>Senior Research Fellow</p>
+      </div>
+      <div class="team-member">
+        <img src="{% static '/home/images/Yosa-Dwi-Hartono.jpg' %}" alt="Yossa Dwi Hartono">
+        <h3>Yossa Dwi Hartono</h3>
+        <p>Senior Research Fellow</p>
+      </div>
+      <div class="team-member">
+        <img src="{% static '/home/images/Liao-Wenjun.jpg' %}" alt="Liao Wenjun">
+        <h3>Liao Wenjun</h3>
+        <p>Research Assistant (Website Developer)</p>
+      </div>
+      <div class="team-member">
+        <img src="{% static '/home/images/JI-Yutong.jpg' %}" alt="Ji Yutong">
+        <h3>Ji Yutong</h3>
+        <p>PhD Student</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="references" style="padding: 3rem 2rem; background-color: #f4f4f4;">
+    <h2 style="text-align: center;">References</h2>
+    <ul style="max-width: 900px; margin: auto; line-height: 1.8; font-size: 0.95rem;">
+      <li>
+        Lin, Z., Akin, H., Rao, R., Hie, B., Zhu, Z., Lu, W., Smetanin, N., Verkuil, R., Kabeli, O., Shmueli, Y., dos Santos Costa, A., Fazel-Zarandi, M., Sercu, T., Candido, S., & Rives, A. (2023). Evolutionary-scale prediction of atomic-level protein structure with a language model. <em>Science, 379</em>(6637), 1123–1130. <a href="https://doi.org/10.1126/science.ade2574" target="_blank">https://doi.org/10.1126/science.ade2574</a>
+      </li>
+      <li>
+        Rodella, C., Lazaridi, S., & Lemmin, T. (2024). TemBERTure: Advancing protein thermostability prediction with deep learning and attention mechanisms. <em>Bioinformatics Advances</em>, <strong>4</strong>(1), vbae103. <a href="https://doi.org/10.1093/bioadv/vbae103" target="_blank">https://doi.org/10.1093/bioadv/vbae103</a>
+      </li>
+      <li>
+        Le Guilloux, V., Schmidtke, P., & Tuffery, P. (2009). Fpocket: An open source platform for ligand pocket detection. <em>BMC Bioinformatics</em>, <em>10</em>, 168. <a href="https://doi.org/10.1186/1471-2105-10-168" target="_blank">https://doi.org/10.1186/1471-2105-10-168</a>
+      </li>
+      <li>
+        Delgado, J., Reche, R., Cianferoni, D., Orlando, G., van der Kant, R., Rousseau, F., Schymkowitz, J., & Serrano, L. (2025). FoldX force field revisited: An improved version. <em>Bioinformatics, 41</em>(2), btaf064. <a href="https://doi.org/10.1093/bioinformatics/btaf064" target="_blank">https://doi.org/10.1093/bioinformatics/btaf064</a>
+      </li>
+      <li>
+        Yu, T., Cui, H., Li, J. C., Luo, Y., Jiang, G., & Zhao, H. (2023). Enzyme function prediction using contrastive learning. <em>Science</em>. <a href="https://10.1126/science.adf2465" target="_blank">10.1126/science.adf2465</a>
+      </li>
+      <li>
+        Gado, J. E., Beckham, G. T., & Payne, C. M. (2020). Improving enzyme optimum temperature prediction with resampling strategies and ensemble learning. <em>Journal of Chemical Information and Modeling, 60</em>(8), 4098–4107. <a href="https://pubs.acs.org/doi/10.1021/acs.jcim.0c00489" target="_blank">https://pubs.acs.org/doi/10.1021/acs.jcim.0c00489</a>
+      </li>
+      <li>
+        Wang, T., Xiang, G., He, S., Su, L., Wang, Y., Yan, X., & Lu, H. (2024). DeepEnzyme: A robust deep learning model for improved enzyme turnover number prediction by utilizing features of protein 3D-structures. <em>Briefings in Bioinformatics, 25</em>(5), bbae409. <a href="https://doi.org/10.1093/bib/bbae409" target="_blank">https://doi.org/10.1093/bib/bbae409</a>
+      </li>
+      <li>
+        Nijkamp, E., Ruffolo, J. A., Weinstein, E. N., Naik, N., & Madani, A. (2023). ProGen2: Exploring the boundaries of protein language models. <em>Cell Systems, 14</em>(11), 968–978.e3. <a href="https://doi.org/10.1016/j.cels.2023.10.002" target="_blank">https://doi.org/10.1016/j.cels.2023.10.002</a>
+      </li> 
+      <li>
+        Nicholas Rego and David Koes, 3Dmol.js: molecular visualization with WebGL. <em>Bioinformatics (2015) 31</em>(8), 1322-1324 <a href="https://doi:10.1093/bioinformatics/btu829" target="_blank">https://doi:10.1093/bioinformatics/btu829</a>
+      </li>    
+      
+    </ul>
+  </section>
+  
+
+  <footer>
+    &copy; 2025 SYNCTI, NUS. All rights reserved.
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>AOS.init();</script>
+</body>
+</html>

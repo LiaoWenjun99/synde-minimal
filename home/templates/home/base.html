@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}SynDe Platform{% endblock %}</title>
+  <link rel="icon" type="image/png" href="{% static 'home/images/logos/S.png' %}">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background-color: #fafafa; }
+    header {
+      background-color: #f0fafa;
+      color: black;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav a {
+      color: black;
+      margin-right: 20px;
+      text-decoration: none;
+    }
+    nav a:hover { text-decoration: underline; }
+    main { padding: 30px; }
+    footer {
+      background: #1f2937;
+      color: black;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <header>
+    <h2><img src="{% static 'home/images/logos/SynDe future 2.png' %}" alt="SynDe Logo"></h2>
+    <nav>
+      <a href="/home/">Home</a>
+      <a href="/models/">Models</a>
+      <a href="/chat/">Chat</a>
+      <a href="/circuit/editor/">Circuit Builder</a>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    SynDe © 2025 — Synthetic Biology Designer
+  </footer>
+</body>
+</html>

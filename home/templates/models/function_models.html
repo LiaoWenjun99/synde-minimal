@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Function Prediction Models | SynDe</title>
+  <style>
+    body { font-family: 'Inter', sans-serif; margin: 0; background-color: #ffffff; color: #2b2b2b; }
+    header { background-color: #d5e8d4; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    header a { color: #EF7C00; font-weight: 600; text-decoration: none; }
+    .container { max-width: 900px; margin: auto; padding: 2rem; }
+    h1 { color: #004d40; }
+    .model { margin-top: 2rem; padding: 1.5rem; background: #f4f4f4; border-radius: 12px; }
+    .model h2 { margin: 0; color: #135d5e; }
+    .model p { margin: 0.5rem 0; }
+    .model img { width: 100%; border-radius: 8px; margin-top: 1rem; }
+    
+    .nav-links {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .nav-links a {
+      color: #1b7e83;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #EF7C00;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/models">&#8592; All Categories</a>
+    <div class="nav-links">
+      <a href="/models/folding">Protein Folding</a>
+      <a href="/models/function">Function Prediction</a>
+      <a href="/models/design">Protein Design</a>
+      <a href="/models/visualization">Visualization & Binding</a>
+    </div>
+  </header>
+  <div class="container">
+    <h1>Function Prediction Models</h1>
+
+    <div class="model">
+      <h2>CLEAN</h2>
+      <p><strong>Description:</strong> Predicts enzyme function (EC number) using contrastive learning and embeddings from protein language models.</p>
+      <p><strong>Inputs:</strong> Amino acid sequence</p>
+      <p><strong>Outputs:</strong> Predicted EC number(s) and confidence scores</p>
+      <img src="{% static 'home/images/clean_output_placeholder.png' %}" alt="CLEAN Output Placeholder">
+    </div>
+
+    <div class="model">
+      <h2>DeepEnzyme</h2>
+      <p><strong>Description:</strong> Predicts enzyme catalytic activity (kcat) using deep learning on protein 3D-structure features and sequence data.</p>
+      <p><strong>Inputs:</strong> Protein sequence and/or PDB file</p>
+      <p><strong>Outputs:</strong> kcat values</p>
+      <img src="{% static 'home/images/deepenzyme_placeholder.png' %}" alt="DeepEnzyme Output Placeholder">
+    </div>
+
+    <div class="model">
+      <h2>TemBERTure</h2>
+      <p><strong>Description:</strong> Predicts melting temperature of proteins using transformer-based encoders and attention scores.</p>
+      <p><strong>Inputs:</strong> Amino acid sequence</p>
+      <p><strong>Outputs:</strong> Melting temperature (°C)</p>
+      <img src="{% static 'home/images/temberture_placeholder.png' %}" alt="TemBERTure Output Placeholder">
+    </div>
+
+    <div class="model">
+      <h2>TOMER</h2>
+      <p><strong>Description:</strong> Ensemble learning model for temperature optimum prediction of enzymes with bootstrapping techniques.</p>
+      <p><strong>Inputs:</strong> Protein sequence</p>
+      <p><strong>Outputs:</strong> Optimal temperature (°C)</p>
+      <img src="{% static 'home/images/tomer_placeholder.png' %}" alt="TOMER Output Placeholder">
+    </div>
+
+    <div class="model">
+      <h2>FoldX</h2>
+      <p><strong>Description:</strong> Calculates the energetic effects of mutations to estimate protein stability via ΔΔG computations.</p>
+      <p><strong>Inputs:</strong> PDB file + mutations</p>
+      <p><strong>Outputs:</strong> ΔΔG value (stability)</p>
+      <img src="{% static 'home/images/foldx_placeholder.png' %}" alt="FoldX Output Placeholder">
+    </div>
+  </div>
+</body>
+</html>

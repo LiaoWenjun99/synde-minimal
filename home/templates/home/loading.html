@@ -1,0 +1,139 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading - SynDe</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    video.bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .dark-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.2);
+      z-index: -1;
+    }
+
+    .overlay {
+      position: absolute;
+      right: 18%;
+      top: 20%;
+      transform: translateY(-50%);
+      color: #fff;
+      text-align: right;
+      max-width: 800px;
+      padding: 1rem;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    .overlay h1 {
+      font-size: 2.8rem;
+      border-right: 2px solid #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 3s steps(40, end) forwards, blink 0.8s;
+      text-shadow: 0 0 10px #00f5ff;
+    }
+
+    .overlay p {
+      font-size: 1.3rem;
+      margin-top: 1rem;
+      opacity: 0;
+      animation: fadeInText 2s ease 3.5s forwards;
+      text-shadow: 0 0 8px #00f5ff;
+    }
+
+    .start-btn {
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #d62828;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeInText 2s ease 4.5s forwards;
+      transition: background-color 0.3s, transform 0.3s;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+    }
+
+    .start-btn:hover {
+      background-color: #c1121f;
+      transform: scale(1.05);
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    @keyframes fadeInText {
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10%); }
+      to { opacity: 1; transform: translateY(-50%); }
+    }
+  </style>
+</head>
+<body>
+
+  <video autoplay muted loop class="bg-video">
+    <source src="{% static 'home/images/Loading_Page.mp4' %}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="dark-overlay"></div>
+
+  <div class="overlay">
+    <h1>SynDe: Synthetic Biology Designer</h1>
+    <p>Protein engineering at your fingertips.</p>
+    <button class="start-btn" onclick="enterWebsite()">Lab Website</button>
+    <button class="start-btn" onclick="enterSyndeChat()">Chat with Synde</button>
+  </div>
+
+  <script>
+    // Function to Enter Website (Redirects to Home)
+    function enterWebsite() {
+      window.location.href = "{% url 'home' %}";
+    }
+    // Function to Enter Website (Redirects to Home)
+    function enterSyndeChat() {
+      window.location.href = "{% url 'chat_home' %}";
+    }
+  </script>
+</body>
+</html>

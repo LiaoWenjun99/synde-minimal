@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protein Design Models | SynDe</title>
+  <style>
+    body { font-family: 'Inter', sans-serif; margin: 0; background-color: #ffffff; color: #2b2b2b; }
+    header { background-color: #d5e8d4; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    header a { color: #EF7C00; font-weight: 600; text-decoration: none; }
+    .container { max-width: 900px; margin: auto; padding: 2rem; }
+    h1 { color: #004d40; }
+    .model { margin-top: 2rem; padding: 1.5rem; background: #f4f4f4; border-radius: 12px; }
+    .model h2 { margin: 0; color: #135d5e; }
+    .model p { margin: 0.5rem 0; }
+    .model img { width: 100%; border-radius: 8px; margin-top: 1rem; }
+    
+    .nav-links {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .nav-links a {
+      color: #1b7e83;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #EF7C00;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/models">&#8592; All Categories</a>
+    <div class="nav-links">
+      <a href="/models/folding">Protein Folding</a>
+      <a href="/models/function">Function Prediction</a>
+      <a href="/models/design">Protein Design</a>
+      <a href="/models/visualization">Visualization & Binding</a>
+    </div>
+  </header>
+  <div class="container">
+    <h1>Protein Design Models</h1>
+
+    <div class="model">
+      <h2>ProGen2</h2>
+      <p><strong>Description:</strong> Transformer-based protein language model capable of generating novel enzyme sequences and predicting sequence viability and function.</p>
+      <p><strong>Inputs:</strong> Wild-type sequence or mutation templates</p>
+      <p><strong>Outputs:</strong> Generated protein sequences, fitness scores</p>
+      <img src="{% static 'home/images/progen2_placeholder.png' %}" alt="ProGen2 Output Placeholder">
+    </div>
+
+  </div>
+</body>
+</html>
