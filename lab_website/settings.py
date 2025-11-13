@@ -85,7 +85,7 @@ WSGI_APPLICATION = "lab_website.wsgi.application"
 import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / "media"
 
 
 # Database
@@ -135,15 +135,17 @@ USE_TZ = True
 
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# ✅ Where Django should store static files after collectstatic
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ✅ Static files (CSS, JavaScript, Images)
+# STATIC
 STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# ✅ Tell Django where to find additional static files
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# If you ever add a global "static/" directory at the project root, keep this.
+# Otherwise it's fine — Django will also pick up app static dirs like home/static/.
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "/home/wenjun/lab_website/home/static"),
 #     os.path.join(BASE_DIR, "/home/wenjun/lab_website/chat_model/static"),
