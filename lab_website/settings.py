@@ -157,3 +157,23 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# ===========================
+# Celery & Redis
+# ===========================
+
+# Replace with your GPU/Redis private IP later, e.g. 10.0.1.23
+REDIS_HOST = "10.0.0.5"   # placeholder
+REDIS_PORT = 6379
+
+CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/0"
+CELERY_RESULT_BACKEND = f"redis://{REDIS_HOST}:{REDIS_PORT}/1"
+
+# Optional but nice to have:
+CELERY_TASK_DEFAULT_QUEUE = "default"
+CELERY_TASK_ROUTES = {
+    "home.tasks.run_esmfold_job": {"queue": "gpu"},
+}
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "UTC"
