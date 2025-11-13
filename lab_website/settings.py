@@ -162,7 +162,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # ===========================
 
 # Replace with your GPU/Redis private IP later, e.g. 10.0.1.23
-REDIS_HOST = "10.0.0.5"   # placeholder
+REDIS_HOST = "127.0.0.1"   # placeholder
 REDIS_PORT = 6379
 
 CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/0"
