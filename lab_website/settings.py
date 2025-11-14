@@ -161,18 +161,22 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Celery & Redis
 # ===========================
 
-# Replace with your GPU/Redis private IP later, e.g. 10.0.1.23
-REDIS_HOST = "127.0.0.1"   # placeholder
+# Redis is running on the main server (SYNDE frontend instance)
+# Replace with private IP later once both servers are in the same VPC.
+REDIS_HOST = "18.214.205.136"
 REDIS_PORT = 6379
 
+# Celery broker + results backend
 CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/0"
 CELERY_RESULT_BACKEND = f"redis://{REDIS_HOST}:{REDIS_PORT}/1"
 
-# Optional but nice to have:
+# Task routing
 CELERY_TASK_DEFAULT_QUEUE = "default"
 CELERY_TASK_ROUTES = {
     "home.tasks.run_esmfold_job": {"queue": "gpu"},
 }
+
+# Serialization & misc config
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
